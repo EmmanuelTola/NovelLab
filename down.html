@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="logo.jpg">
+<meta name="theme-color" content="#708090">
+     <script src="https://cdn.jsdelivr.net/npm/docx@7.2.0/build/index.min.js"></script>
+       
+<title>NovelLab</title>
+
+</head>
+
+<body>
+    <style>
+html, body {
+margin: 0;
+}
+</style>
+
+<div id="display">
+    
+</div>
+
+  <script>
+    // Function to handle received messages
+    function receiveMessage(event) {
+      // Ensure the event is coming from the expected origin
+      // if (event.origin !== 'https://yourdomain.com') return;
+
+      // Get the received data
+      const receivedData = event.data;
+
+
+      // display the received data
+      let data = receivedData[1];
+      document.getElementById('display').innerHTML = data; 
+      document.title = receivedData[0]; 
+    
+    
+generateDoc(data, receivedData); 
+    
+    
+      
+      
+ 
+      
+      
+    }
+
+    // Add an event listener for the message event
+    window.addEventListener('message', receiveMessage, false);
+    
+    
+    
+    async function generateDoc(data, pack) {
+ let nameh = pack[0];  
+ let type = pack[2];
+ 
+ 
+ if(type == "html"){
+ const blob = new Blob([data], {type: 'text/html'}); 
+const fileUrl = URL.createObjectURL(blob); 
+const link = document.createElement("a"); 
+link.href = fileUrl; 
+link.id = 'jsq';
+link.download = nameh+'.html'; 
+link.click();    
+setTimeout(function(){
+       window.close();
+      }, 5000);      
+ }
+ 
+ 
+ if(type == "doc"){
+   
+   
+    try{
+      const { Document, Packer, Paragraph, TextRun } = docx;    // Fetch the content
+          
+   let contentDiv = document.getElementById('display');
+
+      // Initialize an empty array to store docx elements
+      let elements = [];
+
+      // Function to recursively traverse nodes and extract text
+      function extractContent(node) {
+     
+     let para = new Paragraph({
+                children: [new TextRun({
+                 text: " "
+                })]
+              }); 
+     
+       
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          // Handle element nodes
+          switch (node.tagName.toLowerCase()) {
+            case 'h1':
+              elements.push(new Paragraph({
+                children: [new TextRun({
+                  text: node.textContent.trim(),
+                  bold: true,
+                  size: 36,
+                })]
+              }));
+              break;
+              
+            case 'p':
+              // Replace <br> with newline characters in the <p> tag
+              let pContent = node.innerHTML.replace(/<br\s*\/?>/gi, '\n').trim();
+              // Split the content by newline characters to handle line breaks
+              let pParts = pContent.split('\n').map(part => part.trim());
+              let pChildren = pParts.map(part => new TextRun({
+                text: part,
+                size: 25,
+                break: 1
+              }));
+              elements.push(new Paragraph({
+                children: pChildren
+              }));
+              break;
+              
+              
+            case 'ul':
+              // Handle unordered list (ul)
+              let listItems = [];
+              node.childNodes.forEach(liNode => {
+                if (liNode.nodeType === Node.ELEMENT_NODE && liNode.tagName.toLowerCase() === 'li') {
+                  listItems.push(new Paragraph({
+                    children: [new TextRun({
+                      text: liNode.textContent.trim(),
+                    })]
+                  }));
+                }
+              });
+              elements.push(...listItems);
+              break;
+            default:
+              // Handle other supported tags or skip unsupported tags
+              break;
+          }
+
+          // Recursively process child nodes
+          Array.from(node.childNodes).forEach(childNode => {
+            extractContent(childNode);
+          });
+        } else {
+            
+            let text = node.textContent.trim();
+          if (text.length > 0) {
+            elements.push(new TextRun({
+              text: text
+            }));
+          }
+        }
+     
+     
+      }
+
+      // Start extracting content from the content div
+      extractContent(contentDiv);
+      // Create a new Document with the processed content
+      const doc = new Document({
+        sections: [{
+          properties: {},
+          children: elements
+        }]
+      });
+  
+  document.getElementById('display').innerHTML = "&nbsp;&nbsp;downloading....";  
+      
+      
+      // Create a Blob from the Document
+      const blob = await Packer.toBlob(doc);
+
+      // Create a URL for the Blob
+      const fileUrl = URL.createObjectURL(blob);
+
+      // Create a link element
+      const link = document.createElement("a");
+      link.href = fileUrl;
+      link.download = nameh+".docx";
+      link.click();
+      setTimeout(function(){
+       window.close();
+      }, 5000); 
+    } catch(error){
+        alert(error)
+    }
+    }
+    
+    }
+  </script>
+</body>
+</html>
+      
