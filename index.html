@@ -1,17 +1,357 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="manifest" href="manifest.json">
+
 <meta name="viewport" content="width=device-width">
 <link rel="shortcut icon" href="asset/logo.jpg">
 <meta name="theme-color" content="#708090">
-<link rel="stylesheet" href="index.css">
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
 <title>NovelLab</title>
 
 </head>
 
 <body>
+  
+<style id="viewer">
+
+.skiptranslate{
+    display: block; 
+    max-width: 150px !important;
+    z-index: -1 !important;
+    height: 0px !important;
+    
+    
+}
+
+.skiptranslate select{ 
+    height: 30px !important;
+    color: lightblue !important;
+}
+
+
+
+.skiptranslate p{ 
+    display: none !important;
+}
+
+body
+{
+    top:0!important;
+    
+}
+ #body {
+ background: white;
+ color: black; 
+ word-wrap: wrap;
+ overflow-x: hidden;
+ }   
+     #tab {
+  overflow: scroll;
+  float: left;
+  clear: both;
+  border-top: rgba(255,255,255, 0.1) solid; 
+  display: block;
+  bottom: 0;
+  position: fixed;
+  background-color: #212121;
+  width: 100vw;
+  margin-left: 0;
+  white-space: nowrap;
+  height: 45px; 
+  overflow-x: hidden;
+} 
+
+  .tab {
+  -ms-overflow-style: none;  
+  width: 0px !important /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+  
+  .tab::-webkit-scrollbar {
+  display: none;
+  width: 0px !important
+}
+
+
+
+.tab button {
+  background: none;
+  color: white;
+  width: auto;
+ border: none;
+ font-size: 70%;
+  overflow: scroll;
+  bottom: 0;
+  text-align: center;
+  margin-right: 13%;
+ height: 45px;
+  display: inline-block; 
+  
+  
+}
+  .tab button{
+  -ms-overflow-style: none;  
+  width: 0px !important /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+  
+  .tab button::-webkit-scrollbar {
+  display: none;
+  width: 0px !important
+}
+
+.tab button p{
+margin-bottom: -1%;
+}
+
+.tab button i{ 
+font-size: 25px;
+}
+.tab button.active {
+  color: #FC4484;
+  font-size: 85%;
+}
+ 
+
+  
+    
+    .sidenav {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  border-radius: 20px 20px 0 0;
+  left: 0;
+   color: white;
+  background-color: #212121;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-bottom: ; 
+  margin-bottom: px;
+    z-index: 50000;  
+}
+
+.sidenav p{ 
+margin-left: 10px; 
+font-size: 18px; 
+color: white;
+margin-bottom: 0px;
+font-family: 'Poppins' !important;
+} 
+
+
+.sidenav a {
+text-decoration: none; 
+color: white; 
+}
+.sidenav in{
+font-size: 14px;
+font-weight: 600;
+color: white;
+float: right;
+
+} 
+
+
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+ 
+  }
+       
+#chaplist {
+    
+    margin-top: 35px;
+    
+}
+
+#chaplist p{ 
+ margin-bottom: 10px;   
+}
+ 
+ .content {
+padding: 10px 10px 0 10px; 
+width: calc(100% - 20px);
+height: calc(100vh - 50px);
+ margin: 0; 
+ word-wrap: wrap;
+ break-word: break; 
+ user-select: none; 
+ overflow-y: scroll; 
+ overflow-x: hidden;
+font-size: 17px;
+font-family: 'Poppins';
+line-height: 30px;
+ } 
+
+ .name { 
+ font-family: 'Poppins', serif; 
+ font-size: 30px; 
+ margin-bottom: 10px; 
+ font-weight: normal;
+ }
+
+ 
+ 
+#topnav { 
+position: fixed;
+top: 0px; 
+width: 100%; 
+margin-left: 0;
+height: 32px; 
+color: white;
+display: block;
+background: #212121;
+z-index: 20000; 
+}  
+
+#fonts, #size {
+
+background: #212121;
+color: white ;
+white-space: nowrap; 
+overflow-x: scroll;
+display: flex;
+margin-left: 6px;
+} 
+
+  #size{
+  -ms-overflow-style: none;  
+  width: 0px !important /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+  
+  #size::-webkit-scrollbar {
+      display: none;
+  width: 0px !important
+}
+
+#fonts{
+  -ms-overflow-style: none;  
+  width: 0px !important /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+  
+  #fonts::-webkit-scrollbar {
+      display: none;
+  width: 0px !important
+}
+
+
+
+
+#cog { 
+background: #212121;
+padding-top: 15px;
+border-radius: 10px 10px 0px 0px;
+color: white;
+position: fixed;
+bottom: 0px; 
+width: 100%; 
+margin-left: 0;
+margin-bottom: 45px; 
+display: none;     
+}
+
+#fonts button{ 
+border: none; 
+background: #eod9cf; 
+border: 5px; 
+width: auto;
+color: black; 
+margin-right: 8px; 
+border-radius: 20px; 
+margin-bottom: 10px;   
+font-family: 'Open Sans', serif;
+font-weight: normal;
+font-size: 15px; 
+padding: 0px 15px 0px 15px; 
+height: 35px;
+} 
+
+
+#size button{ 
+border: none; 
+background: #eod9cf;  
+width: 45px;
+color: black; 
+margin-right: 8px; 
+border-radius: 50%; 
+margin-bottom: 10px;   
+font-family: 'Open Sans', serif;
+font-weight: normal;
+font-size: 15px; 
+height: 45px;
+} 
+ 
+ #loader {      
+  position: fixed;
+  top: 0;
+  bottom: 0%;
+  left: 0;
+  right: 0%; 
+  overflow: scroll;
+  height: 100vh;
+  display:none;
+  width: 100vw;
+  background: #0c1117;
+  z-index: 50004;
+} 
+
+
+#lang { 
+  margin-bottom: 50px;} 
+#lang select {
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  background: none;
+  padding-left: 5px;
+} 
+#lang button { 
+  
+  width: 120px;
+  padding: 14px;
+  outline: none;
+  border: none;
+  color: #fff;
+  height: 40px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 17px;
+  border-radius: 5px;
+  background: #5372F0;
+
+} 
+
+ #editor {       
+  position: fixed;
+  top: 0;
+  bottom: 0%;
+  left: 0;
+  right: 0%; 
+  padding: 10px;
+  overflow: scroll;
+  height: 100vh;
+  display:none; 
+  background-color: rgba(0,0,0,0.3);
+  z-index: 20002;
+} 
+
+    .tapgo { 
+        display: none; }
+    
+
+	
+</style>
+  
+  
     <style>
 html, body {
 margin: 0;
@@ -521,7 +861,7 @@ align-items: center;
       // Ensure the new window is fully loaded before sending the message
       newWindow.onload = function() {
         // Send data using postMessage
-        newWindow.postMessage(data, '*');
+        newWindow.postMessage(data, window.location.href);
       }; 
       }  
  }
@@ -1118,6 +1458,33 @@ function getRandomElement(array) {
             });
         }
  
+// Function to decrease the size of elements by 2px
+function decreaseSize(element) {
+    // Get the computed style of the element
+    const style = window.getComputedStyle(element);
 
+    // List of properties to adjust
+    const properties = ['width', 'height', 'font-size', 'padding', 'margin', 'border-width'];
+
+    // Iterate over the properties and adjust their values
+    properties.forEach(property => {
+        let value = style.getPropertyValue(property);
+        if (value && value.endsWith('px')) {
+            let newValue = parseFloat(value) - 3;
+            element.style[property] = `${newValue}px`;
+        }
+    });
+}
+
+// Apply the size reduction to all elements on the page
+function applySizeReduction() {
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(element => {
+        decreaseSize(element);
+    });
+}
+
+// Run the function once the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', applySizeReduction);
 
     </script>
