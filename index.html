@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="asset/logo.jpg">
+<meta name="theme-color" content="#708090">
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
+<title>NovelLab</title>
+
+</head>
+
+<body>
+    <style>
+html, body {
+margin: 0;
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid plum;
+  border-bottom: 4px solid salmon;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: rotate 1s linear infinite;
+}
+
+
+.cursor {
+            border-right: 2px solid black;
+            animation: blink 0.7s steps(1) infinite;
+        }
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+        .noblink {
+            border: none;
+            animation: none;
+        }
+  
+.boxlist-icon {
+display: inline-block;
+}  
+
+.box-up, .box-down {
+ width: 100%;
+ display: flex;
+ 
+}
+.boxlist-icon .box-up {
+margin-bottom: 2px; 
+}
+
+        
+ .boxlist-icon .button {
+ width: 30%; 
+ aspect-ratio: 1/1; 
+ border-radius: 1px;
+ }  
+ 
+ 
+ .boxlist-icon .box-up .button:last-child,   .boxlist-icon .box-down .button:last-child{
+ margin-left: 1.5px;
+}
+
+.boxlist-icon .box-up .irregular:last-child, .boxlist-icon .box-down .irregular:first-child {
+aspect-ratio: 1/0.6 !important;
+height: 18%; 
+}
+     
+     
+.boxlist-icon .box-up .irregular:first-child, .boxlist-icon .box-down .irregular:last-child {
+aspect-ratio: 1/1.4 !important;
+height: 42%; 
+}
+
+.boxlist-icon .box-down .irregular:last-child {
+margin-top: -24%;
+}
+     
+.boxlist-icon .box-down {
+
+}     
+  
+.inp {
+padding: 10px 15px 10px 15px;
+height: 30px; 
+width: calc(95% - 25px);
+margin-left: 5px;
+font-family: 'Outfit';
+font-size: 16px;
+border: 1.5px solid grey;
+back: none;
+color: black;
+border-radius: 5px; 
+margin-bottom: 12px; 
+outline: none;
+}
+.inp:hover {
+border: none;
+outline: 1.5px solid plum;   
+}     
+
+
+  
+.einp {
+padding: 10px 15px 10px 15px;
+height: 30px; 
+width: calc(95% - 35px);
+margin-left: 10px;
+font-family: 'Outfit';
+font-size: 16px;
+border: none;
+border-bottom: 1.5px solid grey;
+back: none;
+color: black;
+border-radius: 3px; 
+background: rgba(255,255,255,0.5); 
+margin-bottom: 12px; 
+outline: none; 
+
+}
+.einp:hover {
+border: none;
+color: white;
+border-radius: 5px; 
+background: none;
+outline: 1.5px solid white;   
+}   
+
+
+#bottomnav-mobile span {
+font-size: 25px;
+margin-top: 15px;
+width: 33.3%;
+justify-content: center;
+margin-left: calc(16.6% - 13px);
+margin-right: calc(16.6% - 13px);
+cursor: pointer;
+margin-bottom: 15px;
+}
+
+#bottomnav-mobile p {
+font-size: 13px;
+margin: 5px 0 0 0;
+}
+
+
+
+#bottomnav-mobile route {
+display: inline;
+}
+#bottomnav-mobile rep {
+display: inline;
+}
+
+
+.route-active {
+color: plum; 
+}
+
+#dropmenu p{
+display: flex; 
+align-items: center;
+}
+
+    </style>
+    
+</style>
+
+
+<div style="z-index: 99; position: absolute; background: white; width: 100%; height: 100vh; top: 0; left: 0" id="newscreen">
+    
+<div style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" page-middle>
+<button class="loading" style="border-radius: 50%; height: 90px; width: 90px; background: none;" radius="50%" height="90px" width="90px"></button>
+<p style="font-size: 16px" font="Outfit"><typing type="rand" speed="100" words="Neatly+organize+your+writing... Set+writing+goals Export+your+works+in+various+formats Sync+your+books+across+devices">Loading Resources...</typing><in typetext="100 noblink">...</in></p>
+</div>   
+</div> 
+
+<section id="mainframe">
+ 
+<div theme="shadow" height="50px" fixed width="100%" index="9" back="white" push="top" class="header">    
+<div size="30px" style="align-items: center" height="50px" flex relative margin="2.5% left" width="95%">  
+<p noselect color="purple" bold font="'Charm', cursive" style="cursor: pointer; align-items: center"><i class="fa fa-feather"></i>&nbsp;NovelLab</p>
+
+<i style="cursor: pointer" absolute push="right" size="40px" color="plum" paint="plum orange salmon pink" class="box-list irregular solid"></i>
+</div>
+        
+</div>
+
+
+<div id="addbook" display="none" fixed back="white" index="10" width="100%" height="100vh" push="top left">
+<div width="95%" margin="2.5% left" flow="scroll" height="100%">
+
+<div margin="-2.5% left" font="Poppins" flex style="align-items : center;" theme="shadow" height="40px" fixed width="100%" index="9" back="white" push="top">
+&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="toggle('#addbook'); toggle('#addnow'); toggle('#delnow')" style="cursor: pointer" size="22px" class="fa fa-arrow-left"></i>&nbsp;&nbsp;Add Book
+
+<in style="cursor: pointer" absolute push="right" size="18px" margin="10px right" onclick="saveBook()" color="plum">Save</in>
+</div>    
+<div height="50px min"></div>
+<p id="fortit" display="none" color="plum" back="white" absolute index="2" size="12px" font="Poppins" margin="-10px,0,0,20px" padding="3px,6px,3px,6px">Title</p>
+<input onblur="hide('#fortit'); this.placeholder = 'Title'" onclick="show('#fortit'); this.placeholder = '';" placeholder="Title" id="bookname" class="inp">
+
+<p id="fordes" display="none" color="plum" back="white" absolute index="2" size="12px" font="Poppins" margin="-10px,0,0,20px" padding="3px,6px,3px,6px">Description</p>
+<textarea height="auto" onkeyup="autoResize(this)" onblur="hide('#fordes'); this.placeholder = 'Description'" onclick="show('#fordes'); this.placeholder = '';" placeholder="Description" id="bookdesc" class="inp"></textarea>
+</div>
+</div>
+
+<button index="11" style="cursor: pointer; transition: ease 0.3s" onclick="toggle('#addbook'); toggle('#addnow'); toggle('#delnow')" theme="shadow" margin="0,30px,50px,0" noborder radius="50%" size="35px" height="70px" width="70px" back="plum" color="white" fixed push="bottom right"><i id="addnow" class="fa fa-feather"></i><i display="none" class="fa fa-times" id="delnow"></i></button>
+
+<div height="60px min">
+</div>
+<div flex-wrap id="allbook" width="95%" margin="2.5% left">
+    
+</div>
+
+</section>
+
+
+<div onclick="toggle('#odrop'); toggle('#cdrop'); toggle('#dropmenu')" display="none" width="150px min" radius="0 0 7px 7px" blend="normal" size="15px" font="Kanit" id="dropmenu" padding="10px" back="white" theme="shadow" index="101" fixed push="top right" margin="40px,15px,0,0">
+<p onclick="exPort()"><i class="fa fa-share-alt"></i>&nbsp;Export</p>    
+<p onclick="delBook()"><i class="fa fa-trash"></i>&nbsp;Delete</p>    
+</div>
+
+<section display="none" push="top left" height="100vh" width="100%" id="bookpage" index="14" back="white" fixed>
+    
+<div font="Poppins" flex style="align-items : center;" theme="shadow" height="40px" fixed width="100%" index="9" back="white" push="top">
+&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="hide('#bookpage'); hide('#dropmenu')" style="cursor: pointer" size="22px" class="fa fa-arrow-left"></i>&nbsp;&nbsp;<p margin="0" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(95% - 35px);" id="currname"></p>
+<i style="cursor: pointer" absolute push="right" size="18px" margin="60px right" onclick="viewBook()" class="fa fa-eye"></i>  
+<i style="cursor: pointer" absolute push="right" size="20px" margin="3px,10px,0,0" onclick="toggle('#odrop'); toggle('#cdrop'); toggle('#dropmenu')" id="odrop" class="box-list solid irregular"></i>  
+<i display="none" style="cursor: pointer" absolute push="right" size="20px" margin="15px right" onclick="toggle('#odrop'); toggle('#cdrop'); toggle('#dropmenu')" id="cdrop" class="fa fa-times"></i>  
+
+
+</div>        
+<div height="50px min"></div>
+
+
+<div id="bookedit" flow="hidden" radius="20px 20px 0 0" back="lightslategray" fixed width="95%" margin="2.5% left" style="height: calc(100vh - 50px)">    
+    
+<div color="white" font="Poppins" flex style="align-items : center" absolute push="top" height="40px" back="rgba(0,0,0,0.1)" width="100%">
+&nbsp;&nbsp;&nbsp;Book Details
+<in font="Kanit" style="cursor: pointer" absolute push="right" size="18px" margin="10px right" onclick="updateBook()" color="white">Save<in id="sdone" display="none">&nbsp;<i class="fa fa-check"></i></in></in>  
+</div> 
+
+
+<div height="40px min"></div>  
+<br>
+<div style="height: calc(100vh - 150px)" flow="scroll">
+<p id="efortit" display="none" color="white" back="lightslategray" absolute index="2" size="12px" font="Poppins" margin="-10px,0,0,20px" padding="3px,6px,3px,6px">Title</p>
+<input onblur="hide('#efortit'); this.placeholder = 'Title'" onclick="show('#efortit'); this.placeholder = '';" placeholder="Title" id="editname" class="einp">
+<p id="efordes" display="none" color="white" back="lightslategray" absolute index="2" size="12px" font="Poppins" margin="-10px,0,0,20px" padding="3px,6px,3px,6px">Description</p>
+<textarea height="auto" onkeyup="autoResize(this)" onblur="hide('#efordes'); this.placeholder = 'Description'" onclick="show('#efordes'); this.placeholder = '';" placeholder="Description" id="editdesc" class="einp"></textarea>   
+</div>
+</div>
+
+
+
+<div display="none" id="bookchap" flow="hidden" radius="20px 20px 0 0" back="lightslategray" fixed width="95%" margin="2.5% left" style="height: calc(100vh - 50px)">    
+    
+<div color="white" font="Poppins" flex style="align-items : center" absolute push="top" height="40px" back="rgba(0,0,0,0.1)" width="100%">
+&nbsp;&nbsp;&nbsp;Chapters
+<i style="cursor: pointer" absolute push="right" size="25px" margin="10px right" onclick="show('#newchap'); document.getElementById('chapname').focus()" color="white" class="fa fa-plus"></i>  
+</div> 
+
+
+
+
+<div height="40px min"></div>  
+<br>
+
+<div width="95%" margin="2.5% left" id="eachchap" style="height: calc(100vh - 150px)" flow="scroll">
+    
+    
+</div>
+</div>
+
+
+<div id="booktrack">
+    
+    
+</div>
+
+<div index="15" display="none" padding="15px,0,15px,0" id="newchap" push="bottom" fixed width="100%" back="white">
+<div width="95%" margin="2.5% left">
+<input placeholder="Chapter Name..." id="chapname" class="inp">
+<br>
+
+<div display="flex" style="justify-content: right;">
+<button onclick="hide('#newchap')" theme="smart" blend="normal" size="16px" back="plum" radius="20px">Cancel</button>
+&nbsp;&nbsp;
+<button onclick="newChapter()" theme="smart" blend="normal" size="16px" back="plum" radius="20px">Save</button>
+</div>
+</div>
+</div>
+
+
+
+<div index="15" display="none" padding="15px,0,15px,0" id="namechap" push="bottom" fixed width="100%" back="white">
+<div width="95%" margin="2.5% left">
+<input placeholder="Chapter Name..." id="echapname" class="inp">
+<br>
+
+<div display="flex" style="justify-content: right;">
+<button onclick="hide('#namechap')" theme="smart" blend="normal" size="16px" back="plum" radius="20px">Cancel</button>
+&nbsp;&nbsp;
+<button onclick="nameChapter()" theme="smart" blend="normal" size="16px" back="plum" radius="20px">Save</button>
+&nbsp;&nbsp;
+<button onclick="delChapter()" theme="smart" blend="normal" size="16px" back="plum" radius="20px">Delete</button>
+</div>
+</div>
+</div>
+
+     
+<div fixed width="100vw" back="white" push="bottom" style="border-top: 0.5px lightslategray solid;" index="12" height="50px" id="bottomnav-mobile">
+<div width="100vw" height="50px" flex style="align-items: center;">
+
+<span onclick="actRr(this); show('#bookedit'); hide('#bookchap'); hide('#booktrack')" class="routelink route-active">
+<i margin="3px left" class="box-list solid"></i>
+<p>Book</p>  
+</span>
+
+<span onclick="actRr(this); hide('#bookedit'); show('#bookchap'); hide('#booktrack')" class="routelink routeactive">
+<i margin="2px left" class="fa fa-feather"></i>
+<p>Write</p>    
+</span>
+
+<span onclick="actRr(this); hide('#bookedit'); hide('#bookchap'); show('#booktrack')" class="routelink routeactive">
+<i margin="6px left" class="fa fa-circle-notch"></i>
+<p>Activity</p>    
+</span>
+
+</div>
+</div>
+</section> 
+
+<section display="none" id="chapedit" fixed width="100%" height="100vh" push="top left" back="white" index="100">
+    
+<div font="Poppins" theme="shadow" height="70px" fixed width="100%" index="9" back="white" push="top">
+<div height="40px" flex style="align-items : center;">
+&nbsp;&nbsp;&nbsp;&nbsp;<i onclick="hide('#chapedit'); stopCount();" style="cursor: pointer" size="22px" class="fa fa-arrow-left"></i>&nbsp;&nbsp;<p margin="0" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(95% - 35px);" id="wname"></p>
+</div>
+<div size="15px" flex height="30px" back="rgba(0,0,0,0.1)" style="padding: 0 15px 0 15px; width: calc(100% - 30px); align-items : center;">
+<in id="nowords"></in>&nbsp;words&nbsp;&nbsp;•&nbsp;&nbsp;<in id="nosen"></in>&nbsp;sentences  
+</div>
+</div>          
+<div height="70px min"></div>   
+<textarea id="cread" size="16px" font="Outfit" noborder style="outline: none; padding: 10px; width: calc(100% - 20px); height: calc(100vh - 70px)"></textarea>
+    
+</section>
+
+<section display="none" height="100vh" push="top left" fixed index="101" back="white" width="100%" id="viewbook">
+<center> 
+	    <div id="topnav">
+    
+ <i onclick="hide('#viewbook');" style="font-size: 22px; margin-top: 3px; float: left; margin-left: 10px;" class="fa fa-arrow-left"></i>
+   
+
+<i onclick="document.getElementById('comments').style.display='block';" style="font-size: 22px; margin-top: 3px; float: right; margin-right: 10px;" class="fa fa-exclamation-circle"></i>
+    
+</div>   </center> 
+		    
+    
+    
+    
+ <div id="tab" class="tab"> 
+    
+     <button onclick="openNav();" style="margin-left: 9%;" class="tablinks"><i class="fa-solid fa-bars"></i></button></a> 
+    
+ 
+ <button onclick="document.getElementById('cog').style.display='block';" class="tablinks"><i class="fa fa-cog"></i></button>
+  
+  <button onclick="loadScene('comments.php?id=6');"><i class="fa-regular fa-comment"></i></i></button>
+  
+ <button class="tablinks" onclick="document.getElementById('moon').style.display='none'; document.getElementById('sun').style.display='inline-block'; document.getElementById('viewbook').style.background='rgba(0,0,0,0.9)'; document.getElementById('viewbook').style.color='white';" id="moon"><i class="fa-solid fa-moon"></i></button>
+ 
+
+  <button style="display:none;" class="tablinks" onclick="document.getElementById('sun').style.display='none'; document.getElementById('moon').style.display='inline-block'; document.getElementById('viewbook').style.background='white'; document.getElementById('viewbook').style.color='black';" id="sun"><i class="fas fa-sun"></i></button>
+
+  </div></div> 
+  
+  
+  
+        
+ <div id="mySidenav" class="sidenav">
+
+ <div id="sideNav" style="position: relative;"> 
+
+ <a style="border-bottom: 1px solid black; padding-bottom: 6px; margin-top: 15px; float: left; position: absolute; top: 0;  width: 100%; background: #212121; font-family: 'Poppins'; font-size: 20px; word-wrap: wrap; font-weight: bold;">
+ <in style="font-size: 40px; color: white; margin-top: ; padding-top: ;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</in>
+     <p style="width: calc(100% - 60px); word-wrap: wrap;" id="vname"></p></a><br>
+<p><br>	 
+<div id="chaplist">
+           
+
+ 
+   
+
+
+ </div>
+    
+     
+  </div>   
+  
+  
+  </div>  
+ 
+ 
+    
+ <div id="cog"> 
+	<div id="lang"> 
+
+	<div style="display: block !important;" id="google_translate_element"></div>
+	</div>
+<div id="size">
+    
+       
+        <button onclick="document.getElementById('content').style.fontSize='15px';">1</button>
+        
+        <button onclick="document.getElementById('content').style.fontSize='17px';">2</button>
+        
+        <button onclick="document.getElementById('content').style.fontSize='19px';">3</button>
+
+<button onclick="document.getElementById('content').style.fontSize='21px';">4</button>
+
+<button onclick="document.getElementById('content').style.fontSize='23px';">5</button>      
+        </div>
+            
+	
+<div id="fonts">
+    
+
+   
+        <button onclick="document.getElementById('content').style.fontFamily='cursive';" style="font-family: cursive;">Cursive</button>
+          <button onclick="document.getElementById('content').style.fontFamily='fantasy';" style="font-family: fantasy;">Fantasy</button> 
+          
+          <button onclick="document.getElementById('content').style.fontFamily='Poppins';" style="font-family: 'Poppins';">Poppins</button>
+          
+      <button onclick="document.getElementById('content').style.fontFamily='Rubik';" style="font-family: 'Rubik';">Rubik</button>
+                 
+          
+           <button onclick="document.getElementById('content').style.fontFamily= 'serif';" style="font-family: serif;">Serif</button>
+           
+           <button onclick="document.getElementById('content').style.fontFamily= 'Outfit';" style="font-family: serif;">Outfit</button>
+           
+      <button onclick="document.getElementById('content').style.fontFamily= 'Ubuntu';" style="font-family: serif;">Ubuntu</button>
+      
+     <button onclick="document.getElementById('content').style.fontFamily= 'Urbanist';" style="font-family: serif;">Urbanist</button>
+        
+   <button onclick="document.getElementById('content').style.fontFamily='Open Sans';" style="font-family: 'Open Sans';">Open Sans</button>
+   
+      <button onclick="document.getElementById('content').style.fontFamily='monospace';" style="font-family: Monaco;">Monaco</button>
+   
+     <button onclick="document.getElementById('content').style.fontFamily='courier';" style="font-family: courier;">Courier</button> 
+     </div> </div> 
+     
+     
+     <div flow="scroll" onclick="tabtoggle(); document.getElementById('cog').style.display='none'; document.getElementById('mySidenav').style.height='0';" class="content" id="content">
+
+       
+        
+</div>   
+    
+</section>
+
+
+
+
+
+
+
+
+<input hidden id="currbook">
+<input hidden id="currname">
+<input hidden id="currchap">
+<input display="none" type="file" id="image" accept="image/*">
+
+
+<div pop="expa CANCEL">
+<div width="100%" page-middle>
+<p margin="20px left" size="18px" font="Kanit">Export Book...</p>
+<p center>
+<select id="etype" size="16px" height="50px" width="90%" class="inp">
+<option value="doc">As Document</option> 
+<option value="html">As HTML</option>
+</select>  <br> 
+<button padding="7px,20px,7px,20px" color="white" theme="smart" blend="normal" back="mediumpurple" size="20px" onclick="exPort('yes')">EXPORT</button>
+</p>   
+</div>    
+</div>
+
+<script>
+  const hispage = "https://cdn.jsdelivr.net/gh/HexxeJS/HexxeDB@latest/hex.js";
+ let wordCount = "";
+ function stopCount(){
+    clearInterval(wordCount);
+ }
+ loadIn(); 
+  
+  
+ function exPort(type){
+ if(type == undefined){
+ hexPop('expa');  
+ } else {
+     viewBook('no');
+  const newWindow = window.open('https://novellab.vercel.app/down.html', '_blank');
+
+      let key = 'bname-'+document.getElementById('currbook').value; 
+      key = localStorage.getItem(key); 
+      const data = []; 
+      data[0] = key; 
+      data[1] = document.getElementById('content').innerHTML; 
+      data[2] = document.getElementById('etype').value;
+      // Ensure the new window is fully loaded before sending the message
+      newWindow.onload = function() {
+        // Send data using postMessage
+        newWindow.postMessage(data, '*');
+      }; 
+      }  
+ }
+  
+  
+function viewBook(sta){
+let keys = document.getElementById('currbook').value;
+let name = localStorage.getItem('bname-'+keys); 
+inHTML('#vname', name); 
+let allchap = []; 
+ 
+Object.keys(localStorage).forEach(function(row){
+if(row.includes("cname-"+keys+'-')) {   
+let lastid = row.split("cname-"+keys+'-').pop(); 
+allchap[lastid] = Number(lastid);
+}}); 
+allchap = allchap.filter(value => typeof value == 'number' && !isNaN(value));
+
+allchap.sort((a, b) => a - b);
+
+
+inHTML('#chaplist', ''); inHTML('#content', '');
+
+allchap.forEach(function(ley){
+let key = "cname-"+keys+"-"+ley; 
+let tit = localStorage.getItem(key); 
+let cid = ley; 
+cid = "cread-"+keys+"-"+cid; 
+let con = localStorage.getItem(cid); 
+con = con.replace(/\n/g, "<br>"); 
+let html = `<p onclick="document.getElementById('${tit}').scrollIntoView(); closeNav(); tabtoggle();">${tit}</p>`; 
+document.getElementById('chaplist').innerHTML += html; 
+
+let dml = `<h1 class="name" id="${tit}">${tit}</h1><p>${con}</p>`;
+
+document.getElementById('content').innerHTML += dml; 
+
+});
+if(sta !== "no") {
+show('#viewbook'); 
+}
+
+
+    if (localStorage.getItem("scroll-"+keys) != null) {
+ document.getElementById('content').scrollTop(localStorage.getItem("scroll-"+keys));
+    }
+
+   document.getElementById('content').addEventListener("scroll", function() {
+        localStorage.setItem("scroll-"+keys, document.getElementById('content').scrollTop());
+    });
+
+
+ 
+   
+}
+
+function delBook(){
+let keys = document.getElementById('currbook').value;
+localStorage.removeItem('bname-'+keys);
+localStorage.getItem('bdesc-'+keys);  
+hide('#bookpage');    
+loadBooks();    
+}
+  
+function tabtoggle() { 
+	 if(document.getElementById('tab').style.display == 'none'){
+ document.getElementById('tab').style.display='block';
+     }
+     else{
+    
+     document.getElementById('tab').style.display='none'; 
+    }
+	 
+	 if(document.getElementById('topnav').style.display == 'none'){
+ document.getElementById('topnav').style.display='block';
+     }
+     else{
+    
+     document.getElementById('topnav').style.display='none'; 
+    }
+	  
+	 
+	 }
+	
+	    function openNav() {
+  document.getElementById("mySidenav").style.height= "80vh";
+ document.getElementById("content"); 
+
+ 
+}
+
+
+function closeNav() {
+  document.getElementById("mySidenav").style.height="0";
+}
+  
+  
+function saveBook(){
+let name = document.getElementById('bookname').value;
+let desc = document.getElementById('bookdesc').value; 
+if(name == ""){
+    
+} else {
+let bookid = makeid(7); 
+localStorage.setItem('bname-'+bookid, name); 
+localStorage.setItem('bdesc-'+bookid, desc); 
+toggle('#addbook'); toggle('#addnow'); toggle('#delnow'); 
+loadBooks();  
+}  
+}
+
+function newChapter(){
+let name = document.getElementById('chapname').value;
+let key = document.getElementById('currbook').value;
+if(name == ""){
+    
+} else {
+
+let allchap = []; 
+let bookid = 0; 
+Object.keys(localStorage).forEach(function(row){
+if(row.includes("cname-"+key+'-')) {   
+let lastid = row.split("cname-"+key+'-').pop(); 
+allchap[lastid] = Number(lastid);
+}}); 
+allchap = allchap.filter(value => typeof value == 'number' && !isNaN(value));
+if(allchap.length > 0){
+bookid = Math.max(...allchap) + 1; 
+}
+
+
+localStorage.setItem('cname-'+key+'-'+bookid, name); 
+localStorage.setItem('cread-'+key+'-'+bookid, "");
+hide('#newchap');
+inValue('#newchap', ''); 
+openBook(key);  
+
+
+
+
+
+
+
+
+
+}  
+}
+
+
+
+
+
+function loadBooks(){
+let targ = document.getElementById('allbook'); 
+targ.innerHTML = "";
+Object.keys(localStorage).forEach(function(key){
+if(key.includes("bname-")) {   
+let name = localStorage.getItem(key);
+let bookid = key.split("bname-").pop(); 
+let div = document.createElement("div"); 
+div.style.position = "relative"; 
+div.style.aspectRatio = "2/3"; 
+div.style.width = "48%";
+div.style.margin = "0 1% 10px 1%";
+div.style.overflow = "hidden"; 
+div.style.borderRadius = "6px"; 
+let src = localStorage.getItem('cover-'+bookid);
+let html = `<div onclick="openBook('${bookid}')" push="top" index="1" opacity="0.3" back="lightblue" width="100%" absolute height="100%"></div>
+<img onclick="openBook('${bookid}')" onerror="this.remove()" src="${src}" push="top" index="2" width="100%" absolute height="100%">
+<div flex style="align-items : center;" push="bottom" index="3" back="rgba(0, 0, 0, 0.3)" width="100%" absolute height="50px">
+<p onclick="inValue('#currbook', '${bookid}'); imPor();" style="cursor: pointer" size="20px" bold margin="5% right" absolute push="right" color="white"><i class="fa fa-image"></i></p> 
+<p style="line-height: 1.2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-width: 80%; -webkit-line-clamp: 2;" margin="2.5% left" color="white" font="Kanit">${name}</p>
+</div>
+`; 
+div.innerHTML = html; 
+targ.appendChild(div); rootHex()
+}});    
+
+
+
+
+
+}
+
+
+
+
+
+function openBook(keys){
+document.getElementById('currbook').value = keys; 
+let name = localStorage.getItem('bname-'+keys); 
+let desc = localStorage.getItem('bdesc-'+keys); 
+inValue('#editname', name); 
+inValue('#editdesc', desc);
+inHTML('#currname', name) 
+show('#bookpage'); 
+
+
+
+
+let targ = document.getElementById('eachchap'); 
+targ.innerHTML = ""; 
+
+
+let allchap = []; 
+ 
+Object.keys(localStorage).forEach(function(row){
+if(row.includes("cname-"+keys+'-')) {   
+let lastid = row.split("cname-"+keys+'-').pop(); 
+allchap[lastid] = Number(lastid);
+}}); 
+allchap = allchap.filter(value => typeof value == 'number' && !isNaN(value));
+
+allchap.sort((a, b) => a - b);
+
+
+
+
+allchap.forEach(function(ley){
+let key = "cname-"+keys+"-"+ley; 
+let tit = localStorage.getItem(key); 
+let cid = ley; 
+cid = "cread-"+keys+"-"+cid; 
+let div = document.createElement("div"); 
+div.style.position = "relative"; 
+div.style.height = "50px"; 
+div.style.width = "95%";
+div.style.padding = "0 2.5% 0 2.5%"; 
+div.style.marginBottom = "10px"; 
+div.style.background = "white";
+div.style.overflow = "hidden"; 
+div.style.borderRadius = "6px"; 
+let html = `
+<p onclick="inValue('#echapname', '${tit}'); inValue('#currname', '${key}'); show('#namechap'); document.getElementById('echapname').focus()" style="cursor: pointer" size="20px" bold margin="5% right" absolute push="right" color="black"><i class="fa fa-pen"></i></p> 
+<p noselect onclick="openChap('${cid}')" style="line-height: 1.2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-width: 80%; -webkit-line-clamp: 2;" margin="2.5% left" color="black" font="Outfit">${tit}</p>`; 
+div.innerHTML = html; 
+targ.appendChild(div); rootHex()
+
+
+});
+let input = document.getElementById('editdesc'); 
+input.style.height = input.scrollHeight + 'px'; 
+    
+
+}
+
+
+
+function openChap(key){
+let name = key.split("cread").pop(); 
+name = "cname"+name; 
+name = localStorage.getItem(name); 
+inHTML('#wname', name); 
+let con = localStorage.getItem(key); 
+inValue('#cread', con); 
+show('#chapedit'); 
+wordCount = setInterval(function(){
+let curr = document.getElementById('cread').value;
+let num = curr.split(' '); 
+num = num.filter(item => item !== ""); 
+num = num.length; 
+let sen = curr.split('.'); 
+sen = sen.filter(item => item !== ""); 
+sen = sen.length;
+inHTML('#nowords', num);
+inHTML('#nosen', sen); 
+localStorage.setItem(key, curr); 
+}, 1000); 
+}
+
+
+function updateBook(){
+let name = document.getElementById('editname').value;
+let desc = document.getElementById('editdesc').value; 
+if(name == ""){
+    
+} else {
+let bookid = document.getElementById('currbook').value; 
+localStorage.setItem('bname-'+bookid, name); 
+localStorage.setItem('bdesc-'+bookid, desc); 
+PopTell('#sdone');
+loadBooks();  
+let input = document.getElementById('editdesc'); 
+input.style.height = input.scrollHeight + 'px'; 
+    
+}      
+   
+    
+}
+
+
+
+function nameChapter(){
+let name = document.getElementById('echapname').value;
+if(name == ""){
+    
+} else {
+let chapkey = document.getElementById('currname').value;
+let bookid = chapkey.split('-').pop(); 
+bookid = chapkey.split('-'+bookid)[0]; 
+bookid = bookid.split('-').pop();
+localStorage.setItem(chapkey, name);  
+openBook(bookid);  
+hide('#namechap');
+}
+
+      
+   
+    
+}
+
+
+function delChapter(){
+
+let chapkey = document.getElementById('currname').value;
+let cread = "cread"+chapkey.split("cname").pop();
+let bookid = chapkey.split('-').pop(); 
+bookid = chapkey.split('-'+bookid)[0]; 
+bookid = bookid.split('-').pop();
+
+localStorage.removeItem(chapkey);  
+localStorage.removeItem(cread); 
+openBook(bookid);  
+hide('#namechap');
+
+
+      
+    
+} 
+
+
+
+
+
+
+
+
+ function autoResize(input) { 
+    
+    input.style.height = 'auto'; 
+
+    input.style.height = input.scrollHeight + 'px'; 
+
+} 
+  
+function fileSize(str) {
+  const bytes = new TextEncoder().encode(str).length;
+
+  if (bytes < 1024) {
+    return bytes + 'B';
+  } else if (bytes < 1024 * 1024) {
+    return (bytes / 1024).toFixed(2) + 'KB';
+  } else {
+    return (bytes / (1024 * 1024)).toFixed(2) + 'MB';
+  }
+}  
+  
+  function imPor() {
+document.getElementById('image').click(); 
+document.querySelector('#image').addEventListener('change', function() {
+  let event = this;
+
+  const selectedFile = event.files[0];
+  if (selectedFile) {
+    const reader = new FileReader();
+
+
+    reader.onload = function(fileEvent) {
+      const fileContent = fileEvent.target.result;
+let name = selectedFile.name; 
+let key = document.getElementById('currbook').value;;
+
+let fsize = fileSize(fileContent); 
+
+if(fsize.includes("MB")) {
+fsize = fsize.split("MB")[0]; 
+if(fsize > 2.5) {
+alert('Exceeds 2.5MB');    
+} else {
+localStorage.setItem('cover-'+key, fileContent); 
+loadBooks();  
+}
+} else if(fsize.includes("KB")) {
+localStorage.setItem('cover-'+key, fileContent);  
+loadBooks();  
+}
+
+
+
+  
+    };
+    
+    
+
+
+reader.readAsDataURL(selectedFile, 'UTF-8'); // Specify the encoding (UTF-8 in this case)
+  }
+});
+
+}
+
+
+async function loadIn() {
+
+let loaded = localStorage.getItem('nlab');
+const fileUploadPromises = [];
+const filePromises = [];   
+if(loaded == null) {
+
+let filePromise; 
+ filePromise = new Promise((resolve) => {
+ fetch(hispage).then(function(response) { response.text().then(function(text) {
+  localStorage.setItem('xjs', text);
+  resolve();
+  }); }); 
+  
+  }); 
+ 
+  
+  filePromises.push(filePromise);
+ 
+  } else {
+let xjs = document.createElement("script"); 
+xjs.innerHTML = localStorage.getItem('xjs'); 
+document.body.appendChild(xjs); 
+setTimeout(delLoad, 1000)
+typeWord(); 
+rootHex()
+
+ 
+  }
+  const filesUploadForInput = async () => {
+await Promise.all(filePromises);
+    };
+
+fileUploadPromises.push(filesUploadForInput);
+
+await Promise.all(fileUploadPromises.map((filesUploadForInput) => filesUploadForInput()));
+
+if(loaded == null) {
+localStorage.setItem('nlab', 'exist');
+history.go(0); 
+}
+loadBooks(); 
+
+}
+
+ 
+  
+ 
+  
+  
+  
+function doList(){
+
+let boxl = document.querySelectorAll('i'); 
+if(boxl){
+boxl.forEach(function(box){
+if(box.getAttribute("class").includes('box-list')){
+const computedStyle = window.getComputedStyle(box);
+let wid = computedStyle.fontSize;
+let col = box.style.color ? box.style.color : computedStyle.color; 
+
+let type = ""; 
+if(box.getAttribute("class").includes('irregular')){
+type = "irregular";
+}
+let backone = "none"; let backtwo = "none"; let backthree = "none"; let backfour = "none";
+
+let colone = col; let coltwo = col; let colthree = col; let colfour = col; 
+let cal = box.getAttribute("paint"); 
+if(cal == null){} else {
+cal = cal.split(' '); 
+if(cal.length == 1) {
+colone = cal[0]; coltwo = cal[0]; colthree = cal[0]; colfour = cal[0]; 
+}
+if(cal.length < 4 && cal.length > 1){
+colone = cal[0]; coltwo = cal[1]; colthree = cal[1]; colfour = cal[0];  
+}
+
+if(cal.length > 3){
+colone = cal[0]; coltwo = cal[1]; colthree = cal[3]; colfour = cal[2];  
+}
+ 
+ 
+}
+
+if(box.getAttribute("class").includes('solid')){
+backone = colone; backtwo = coltwo; backthree = colthree; backfour = colfour; 
+}
+
+
+
+box.innerHTML = `<div style="width: ${wid}" class="boxlist-icon">
+<div class="box-up">
+<div class="button ${type}" style="border: 1px solid ${colone}; background: ${backone}; "></div><div class="button ${type}" style="border: 1px solid ${coltwo}; background: ${backtwo}; "></div>
+</div>
+<div class="box-down">
+<div class="button ${type}" style="border: 1px solid ${colthree}; background: ${backthree}; "></div><div class="button ${type}" style="border: 1px solid ${colfour}; background: ${backfour}; "></div>
+</div>
+</div>`;
+}
+})
+}
+
+}
+doList(); 
+setInterval(doList, 100)
+
+
+ 
+
+
+  
+function delLoad(){
+document.getElementById('newscreen').remove();
+}
+  
+  
+ function typeWord() {
+  
+ function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function getRandomElement(array) {
+    if (array.length === 0) {
+        return undefined; // or handle the empty array case as needed
+    }
+    const shuffledArray = shuffleArray(array);
+    return shuffledArray[Math.floor(Math.random() * shuffledArray.length)];
+} 
+  
+  
+            const typeElements = document.querySelectorAll('typing');
+
+            typeElements.forEach(element => {
+                const words = element.getAttribute('words').split(' ');
+                
+                let speed = element.getAttribute('speed');
+               let type = element.getAttribute("type")
+             
+       if(type == "rand" || type == "random") {
+           
+   let chos = getRandomElement(words); 
+   chos = chos.replace(/\+/g, ' ');  
+   element.innerText = chos;     
+       } else {      
+             
+                if(speed == undefined || speed == null) {
+                   speed = 100;
+                }
+               speed = Number(speed);
+               
+                const noblink = element.hasAttribute('noblink');
+                let currentWordIndex = 0;
+                let currentCharIndex = 0;
+                let isDeleting = false;
+
+                const cursorSpan = document.createElement('span');
+                cursorSpan.className = 'cursor';
+                if (noblink) {
+                    cursorSpan.classList.add('noblink');
+                }
+                element.appendChild(cursorSpan);
+
+                function type() {
+                    let currentWord = words[currentWordIndex];
+                    currentWord = currentWord.replace(/\+/g, ' '); 
+                    const displayText = isDeleting 
+                        ? currentWord.substring(0, currentCharIndex--)
+                        : currentWord.substring(0, currentCharIndex++);
+
+                    element.textContent = displayText;
+                    element.appendChild(cursorSpan);
+
+                    if (!isDeleting && currentCharIndex === currentWord.length) {
+                        setTimeout(() => isDeleting = true, speed);
+                    } else if (isDeleting && currentCharIndex === 0) {
+                        isDeleting = false;
+                        currentWordIndex = (currentWordIndex + 1) % words.length;
+                    }
+
+                    const typingSpeed = isDeleting ? 50 : speed;
+                    setTimeout(type, typingSpeed);
+                }
+
+                type();
+                }
+            });
+        }
+ 
+
+
+    </script>
