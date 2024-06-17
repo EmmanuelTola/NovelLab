@@ -26,7 +26,7 @@ margin: 0;
     function receiveMessage(event) {
       // Ensure the event is coming from the expected origin
       // if (event.origin !== 'https://yourdomain.com') return;
-
+alert(event.origin);
       // Get the received data
       const receivedData = event.data;
 
